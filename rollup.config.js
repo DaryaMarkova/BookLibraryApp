@@ -8,5 +8,5 @@ export default {
     dir: "dist",
     format: "iife"
   },
-  plugins: [css(), nodeResolve]
+  plugins: [css({'output': 'assets/bundle.css' }), nodeResolve]
 }

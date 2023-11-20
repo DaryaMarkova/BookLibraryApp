@@ -9,5 +9,6 @@
   "extends": "eslint:recommended",
   "overrides": [],
   "rules": {
+    "no-undef": false
   }
 }
