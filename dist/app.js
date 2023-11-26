@@ -5,17 +5,19 @@
         constructor(params) {
           this.app = document.getElementById('root');
           this.params = params;
-          
-          // TODO
-          // this.params.state.subscribe;
+
+          this.params.store.subscribe(newState => {
+            console.log('Subscribe store state', newState);
+            this.render();
+          });
         }
 
         setTitle(title) {
           document.title = title;
         }
 
-        get state() {
-          return (this.params || {}).state;
+        get store() {
+          return (this.params || {}).store;
         }
 
         render() {
@@ -32,22 +34,21 @@
           super(params);
           this.setTitle('Поиск книг');
 
+          setTimeout( () => {
+            super.store.state$.list.push({surname: 'Darya Markova'});
+          }, 3000);
         }
 
         render() {
           const main = document.createElement('div');
-          main.innerHTML = 'Тест';
-
+          main.innerHTML = 'MainView is rendered' + JSON.stringify(super.store.state$);
 
           this.app.innerHTML = '';
           this.app.append(main);
-
-          super.state.list.push({surname: 'Darya Markova'});
         }
     }
 
     class Router {
-      // route is typeof { path: string, view: Object, params: { state: this.state$ } }
       constructor(routes) {
         this.routes = routes || [];
       }
@@ -1070,6 +1071,7 @@
 
     class State {
       state$ = undefined;
+      __handlers = [];
 
       constructor() {
         this.state = {
@@ -1080,24 +1082,31 @@
         };
       }
 
+
       bootstrap() {
-        this.state$ = onChange(this.state, this.onStateChange.bind(this));
-        // this.state$ = new MutationObserver(this.state)
-        return this.state$;
+        this.state$ = onChange(this.state, this.__onStateChange.bind(this));
+        return this;
       }
 
-      onStateChange = (path, value, previousValue, applyData) => {
-        console.log('onStateChange inside');
+      subscribe(stateChangeHandler) {
+        this.__handlers.push(stateChangeHandler);
+      }
+
+      __onStateChange = (path, value, previousValue, applyData) => {
+        // подписка на обновление стейта
+        this.__handlers.forEach(handler => {
+          handler.call(this, this.state);
+        });
       }
     }
 
     class App {
       constructor() {
-        this.state$ = new State().bootstrap();
+        this.store = new State().bootstrap();
 
         new Router(
           [
-            { path: "", view: MainView, params: { state: this.state$ } }
+            { path: "", view: MainView, params: { store: this.store } }
           ]
         ).bootstrap();
       }

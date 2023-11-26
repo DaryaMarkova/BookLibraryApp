@@ -9,11 +9,11 @@ import { State } from './state';
 
 class App {
   constructor() {
-    this.state$ = new State().bootstrap();
+    this.store = new State().bootstrap();
 
     new Router(
       [
-        { path: "", view: MainView, params: { state: this.state$ } }
+        { path: "", view: MainView, params: { store: this.store } }
       ]
     ).bootstrap();
   }

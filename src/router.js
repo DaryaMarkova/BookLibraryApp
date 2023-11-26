@@ -1,6 +1,5 @@
 
 export class Router {
-  // route is typeof { path: string, view: Object, params: { state: this.state$ } }
   constructor(routes) {
     this.routes = routes || [];
   }

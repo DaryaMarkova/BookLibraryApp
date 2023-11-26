@@ -4,6 +4,7 @@ import onChange from 'on-change';
 
 export class State {
   state$ = undefined;
+  __handlers = [];
 
   constructor() {
     this.state = {
@@ -14,13 +15,20 @@ export class State {
     }
   }
 
+
   bootstrap() {
-    this.state$ = onChange(this.state, this.onStateChange.bind(this));
-    // this.state$ = new MutationObserver(this.state)
-    return this.state$;
+    this.state$ = onChange(this.state, this.__onStateChange.bind(this))
+    return this;
   }
 
-  onStateChange = (path, value, previousValue, applyData) => {
-    console.log('onStateChange inside')
+  subscribe(stateChangeHandler) {
+    this.__handlers.push(stateChangeHandler);
+  }
+
+  __onStateChange = (path, value, previousValue, applyData) => {
+    // подписка на обновление стейта
+    this.__handlers.forEach(handler => {
+      handler.call(this, this.state)
+    });
   }
 }
