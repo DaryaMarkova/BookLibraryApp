@@ -1,12 +1,11 @@
 
 export class Router {
+  // route is typeof { path: string, view: Object, params: { state: this.state$ } }
   constructor(routes) {
     this.routes = routes || [];
-
   }
 
   bootstrap() {
-    console.log("bootstrapping routes");
     window.addEventListener('hashchange', this.route.bind(this));
     window.addEventListener('load', this.route.bind(this));
   }
@@ -16,9 +15,11 @@ export class Router {
       this.currentView.destroy();
     }
 
-    const view = this.routes.find(r => r.path == location.hash).view;
+    const currentRoute = this.routes.find(r => r.path == location.hash);
 
-    this.currentView = new view();
-    this.currentView.render();
+    if (currentRoute) {
+      this.currentView = new currentRoute.view(currentRoute.params);
+      this.currentView.render();
+    }
   }
 }

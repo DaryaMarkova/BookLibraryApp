@@ -1,10 +1,18 @@
 export class AbstractView {
-    constructor() {
+    constructor(params) {
       this.app = document.getElementById('root');
+      this.params = params;
+      
+      // TODO
+      // this.params.state.subscribe;
     }
 
     setTitle(title) {
       document.title = title;
+    }
+
+    get state() {
+      return (this.params || {}).state;
     }
 
     render() {

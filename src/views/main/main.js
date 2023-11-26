@@ -1,9 +1,10 @@
 import { AbstractView } from '../../common/view.js';
 
 export class MainView extends AbstractView {
-    constructor() {
-      super();
-      this.setTitle('Поиск книгг');
+    constructor(params) {
+      super(params);
+      this.setTitle('Поиск книг');
+
     }
 
     render() {
@@ -13,5 +14,7 @@ export class MainView extends AbstractView {
 
       this.app.innerHTML = '';
       this.app.append(main);
+
+      super.state.list.push({surname: 'Darya Markova'})
     }
 }
