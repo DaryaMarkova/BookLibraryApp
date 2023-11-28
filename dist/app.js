@@ -29,6 +29,34 @@
         }
     }
 
+    class DivComponent {
+      constructor() {
+        this.elem = document.createElement('div');
+      }
+
+      render() {
+      }
+    }
+
+    class Header extends DivComponent {
+      constructor(appState) {
+        super();
+        this.appState = appState;
+      }
+
+      render() {
+        this.elem.classList.add('header');
+
+        this.elem.innerHTML = `
+      <div>
+        <img src="/static/logo.png" alt="Логотип" />
+      </div>
+    `;
+
+        return this.elem;
+      }
+    }
+
     class MainView extends AbstractView {
         constructor(params) {
           super(params);
@@ -45,6 +73,13 @@
 
           this.app.innerHTML = '';
           this.app.append(main);
+
+          this.renderHeader();
+        }
+
+        renderHeader() {
+          const header = new Header(super.store).render();
+          this.app.prepend(header);
         }
     }
 
