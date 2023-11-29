@@ -4,7 +4,7 @@ export class AbstractView {
       this.params = params;
 
       this.params.store.subscribe(newState => {
-        console.log('Subscribe store state', newState);
+        console.log('Subscribing store state', newState);
         this.render();
       })
     }

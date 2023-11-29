@@ -23,3 +23,10 @@
 
 body {
   font-family: "Comic Sans MS", "Comic Sans", cursive; }
+
+.search {
+  display: inline; }
+
+.search img {
+  width: 20px;
+  height: auto; }

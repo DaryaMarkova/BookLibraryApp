@@ -7,7 +7,7 @@
           this.params = params;
 
           this.params.store.subscribe(newState => {
-            console.log('Subscribe store state', newState);
+            console.log('Subscribing store state', newState);
             this.render();
           });
         }
@@ -38,7 +38,39 @@
       }
     }
 
-    class Header extends DivComponent {
+    class SearchComponent extends DivComponent {
+      constructor(appState) {
+        super();
+        this.appState = appState;
+      }
+
+      search() {
+        const value = this.elem.querySelector('input').value;
+        this.appState.state$.searchQuery = value;
+      }
+
+      render() {
+        this.elem.classList.add('search');
+
+        this.elem.innerHTML = `
+      <a class="menu-item" href="#">
+        <img src="/static/search.png" alt="Поиск иконка" />
+        
+        <input 
+          type="text" 
+          placeholder="Поиск..."
+          aria-label="Искать"
+          class="search-input"
+          value="${this.appState.state$.searchQuery}" 
+        />
+      </a> 
+    `;
+        this.elem.querySelector('input').addEventListener('change', this.search.bind(this));
+        return this.elem;
+      }
+    }
+
+    class HeaderComponent extends DivComponent {
       constructor(appState) {
         super();
         this.appState = appState;
@@ -52,16 +84,18 @@
         <img src="/static/logo.png" alt="Логотип" />
       </div>
       <div class="menu">
-        <a class="menu-item" href='#'>
+        <!--<a class="menu-item" href='#'>
           <img src="/static/search.png" alt="Поиск иконка" />
           <input type="text" placeholder="Поиск книг" />
-        </a>
+        </a>-->
         <a class="menu-item" href='#'>
           <img src="/static/favourite.png" alt="Избранное иконка" />
           Избранное (${this.appState.state$.favourite})
         </a>
       </div>
     `;
+
+        this.elem.getElementsByClassName('menu')[0].prepend(new SearchComponent(this.appState).render());
 
         return this.elem;
       }
@@ -84,11 +118,12 @@
           this.app.innerHTML = '';
           this.app.append(main);
 
+
           this.renderHeader();
         }
 
         renderHeader() {
-          const header = new Header(super.store).render();
+          const header = new HeaderComponent(super.store).render();
           this.app.prepend(header);
         }
     }
@@ -1122,12 +1157,11 @@
         this.state = {
           list: [],
           loading: false,
-          searchQuery: undefined,
+          searchQuery: '',
           offset: 0,
           favourite: 5
         };
       }
-
 
       bootstrap() {
         this.state$ = onChange(this.state, this.__onStateChange.bind(this));
@@ -1139,6 +1173,14 @@
       }
 
       __onStateChange = (path, value, previousValue, applyData) => {
+        switch(path) {
+          case 'searchQuery':
+            // fetch list from query 
+            // https://openlibrary.org/search.json?q=%D0%B3%D0%B0%D1%80%D1%80%D0%B8
+            console.log("reducer: searchQuery", value);
+          break;
+        }
+
         // подписка на обновление стейта
         this.__handlers.forEach(handler => {
           handler.call(this, this.state);

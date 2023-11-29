@@ -1,5 +1,5 @@
 import { AbstractView } from '../../common/view.js';
-import { Header } from '../../components/header/header.js';
+import { HeaderComponent } from '../../components/header/header.js';
 
 export class MainView extends AbstractView {
     constructor(params) {
@@ -18,11 +18,12 @@ export class MainView extends AbstractView {
       this.app.innerHTML = '';
       this.app.append(main);
 
+
       this.renderHeader();
     }
 
     renderHeader() {
-      const header = new Header(super.store).render();
+      const header = new HeaderComponent(super.store).render();
       this.app.prepend(header);
     }
 }
