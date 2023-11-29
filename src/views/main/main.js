@@ -6,9 +6,9 @@ export class MainView extends AbstractView {
       super(params);
       this.setTitle('Поиск книг');
 
-      setTimeout( () => {
-        super.store.state$.list.push({surname: 'Darya Markova'});
-      }, 3000);
+      // setTimeout( () => {
+      //   super.store.state$.list.push({surname: 'Darya Markova'});
+      // }, 3000);
     }
 
     render() {

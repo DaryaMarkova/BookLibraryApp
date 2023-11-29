@@ -1,4 +1,7 @@
-import css from 'rollup-plugin-import-css';
+
+import scss from 'rollup-plugin-scss';
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
 
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
@@ -8,5 +11,10 @@ export default {
     dir: "dist",
     format: "iife"
   },
-  plugins: [css({'output': 'assets/bundle.css' }), nodeResolve()]
+  plugins: [
+    scss({
+      fileName: 'assets/bundle.css',
+    }),
+    nodeResolve()
+  ]
 }

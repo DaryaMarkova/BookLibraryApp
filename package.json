@@ -12,9 +12,13 @@
   "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "autoprefixer": "^10.4.16",
     "eslint": "^8.54.0",
+    "node-sass": "^9.0.0",
+    "on-change": "^4.0.2",
+    "postcss": "^8.4.31",
     "rollup": "^3.14.0",
     "rollup-plugin-import-css": "^3.3.5",
-    "on-change": "^4.0.2"
+    "rollup-plugin-scss": "^4.0.0"
   }
 }

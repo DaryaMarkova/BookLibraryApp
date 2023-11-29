@@ -1,6 +1,6 @@
 'use strict';
 
-import './app.css';
+import './app.scss';
 
 import { MainView } from './views/main/main';
 import { Router } from './router';

@@ -13,6 +13,16 @@ export class Header extends DivComponent {
       <div>
         <img src="/static/logo.png" alt="Логотип" />
       </div>
+      <div class="menu">
+        <a class="menu-item" href='#'>
+          <img src="/static/search.svg" alt="Поиск иконка" />
+          Поиск книг
+        </a>
+        <a class="menu-item" href='#'>
+          <img src="/static/favorites.svg" alt="Избранное иконка" />
+          Избранное
+        </a>
+      </div>
     `;
 
     return this.elem;
