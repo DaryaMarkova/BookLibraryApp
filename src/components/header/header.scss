@@ -1,3 +1,29 @@
 .header {
-  border: 1px solid red;
+  width: 1020px;
+  display: flex;
+  margin: 16px auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+
+  img {
+    width: 100px;
+    height: auto;
+    margin-right: 4px;
+  }
+
+  .menu-item {
+    display: inline-flex;
+    margin-right: 16px;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: #000;
+  }
+
+  .menu-item img {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+  }
 }

@@ -15,12 +15,12 @@ export class Header extends DivComponent {
       </div>
       <div class="menu">
         <a class="menu-item" href='#'>
-          <img src="/static/search.svg" alt="Поиск иконка" />
-          Поиск книг
+          <img src="/static/search.png" alt="Поиск иконка" />
+          <input type="text" placeholder="Поиск книг" />
         </a>
         <a class="menu-item" href='#'>
-          <img src="/static/favorites.svg" alt="Избранное иконка" />
-          Избранное
+          <img src="/static/favourite.png" alt="Избранное иконка" />
+          Избранное (${this.appState.state$.favourite})
         </a>
       </div>
     `;

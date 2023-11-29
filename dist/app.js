@@ -53,12 +53,12 @@
       </div>
       <div class="menu">
         <a class="menu-item" href='#'>
-          <img src="/static/search.svg" alt="Поиск иконка" />
-          Поиск книг
+          <img src="/static/search.png" alt="Поиск иконка" />
+          <input type="text" placeholder="Поиск книг" />
         </a>
         <a class="menu-item" href='#'>
-          <img src="/static/favorites.svg" alt="Избранное иконка" />
-          Избранное
+          <img src="/static/favourite.png" alt="Избранное иконка" />
+          Избранное (${this.appState.state$.favourite})
         </a>
       </div>
     `;
@@ -79,7 +79,7 @@
 
         render() {
           const main = document.createElement('div');
-          main.innerHTML = 'MainView is rendered' + JSON.stringify(super.store.state$);
+          // main.innerHTML = 'MainView is rendered' + JSON.stringify(super.store.state$);
 
           this.app.innerHTML = '';
           this.app.append(main);
@@ -1123,7 +1123,8 @@
           list: [],
           loading: false,
           searchQuery: undefined,
-          offset: 0
+          offset: 0,
+          favourite: 5
         };
       }
 

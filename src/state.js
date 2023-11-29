@@ -11,7 +11,8 @@ export class State {
       list: [],
       loading: false,
       searchQuery: undefined,
-      offset: 0
+      offset: 0,
+      favourite: 5
     }
   }
 

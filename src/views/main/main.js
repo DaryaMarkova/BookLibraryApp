@@ -13,7 +13,7 @@ export class MainView extends AbstractView {
 
     render() {
       const main = document.createElement('div');
-      main.innerHTML = 'MainView is rendered' + JSON.stringify(super.store.state$);
+      // main.innerHTML = 'MainView is rendered' + JSON.stringify(super.store.state$);
 
       this.app.innerHTML = '';
       this.app.append(main);
